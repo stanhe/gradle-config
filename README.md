@@ -2,7 +2,7 @@
 ##android studio gradle config.
 ### 1.versionCode
 #### 1.1 build.gradle(Project)
-添加gradle属性 **appVersionCode**
+add gradle property **appVersionCode**
 ```
 ext.appVersionCode = initVersionCode()
 
@@ -56,3 +56,28 @@ tasks.whenTaskAdded { task ->
         task.dependsOn 'increaseManifestVersionCode'
     }
 }
+```
+### 2. init properties
+#### 2.1 local.properties
+add properties
+```
+#Wed Jun 29 22:33:01 CST 2016
+sdk.dir=C\:\\Users\\stan\\AppData\\Local\\Android\\Sdk
+app.api=api-23-5.0
+app.author = stan
+```
+#### 2.2 rootDir/setting.gradle
+```
+include ':app'
+def initSettingsEnv(){
+    Properties properties = new Properties()
+    String path = rootDir.getAbsolutePath()+"/local.properties"
+    File propertiesFile = new File(path)
+    properties.load(propertiesFile.newDataInputStream())
+    gradle.ext.api = properties.getProperty("app.api")
+    gradle.ext.author = properties.getProperty("app.author")
+}
+
+initSettingsEnv()
+```
+and then we can get the property with gradle.api/gradle.author
