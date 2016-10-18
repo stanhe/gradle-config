@@ -1,6 +1,7 @@
 # gradle-config
-android studio gradle config.
-#### 1.build.gradle(Project)
+##android studio gradle config.
+### 1.versionCode
+#### 1.1 build.gradle(Project)
 添加gradle属性 **appVersionCode**
 ```
 ext.appVersionCode = initVersionCode()
@@ -22,7 +23,7 @@ def initVersionCode(){
     return versionCode
 }
 ```
-#### 2.build.gradle(Module:app)
+#### 1.2 build.gradle(Module:app)
 ```
 
 android {
