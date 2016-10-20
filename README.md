@@ -2,23 +2,22 @@
 ##android studio gradle config.
 ### 1.versionCode
 #### 1.1 build.gradle(Project)
-add gradle property **appVersionCode**
+add gradle property **appVersionCode** versionCode in module:app is manifest+1.
 ```
+// add properties appVersionCode
 ext.appVersionCode = initVersionCode()
-
 import java.util.regex.Pattern
-
 def initVersionCode(){
-    def manifestFile = file("app/src/main/AndroidManifest.xml")
+    def manifestFile = file("jancartui2/src/main/AndroidManifest.xml")
     def manifestText = manifestFile.getText()
     def matcher = Pattern.compile("versionCode=\"(\\d+)\"").matcher(manifestText)
-    def versionCode = 0;
+    def versionCode = -2;
     try{
         matcher.find()
-        versionCode = Integer.parseInt(matcher.group(1))
+        versionCode = Integer.parseInt(matcher.group(1))+1
     }catch (Exception e){e.printStackTrace()}
     println(" --------->  current versionCode : "+versionCode)
-    if (versionCode==0)
+    if (versionCode==-1)
         throw Exception("can't get versionCode");
     return versionCode
 }
